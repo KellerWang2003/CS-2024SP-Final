@@ -11,27 +11,42 @@
       }
     </script>
     <script>function setup() {}</script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <py-config type="json">
-      {
-        "fetch": [{
-          "files": ["main.py"]
-        }]
-      }
-    </py-config>
-    <py-script>
-      from pyodide.ffi import create_proxy
-      from main import *
+    <main>
+      <py-config type="json">
+        {
+          "fetch": [{
+            "files": ["main.py", "movement.py"]
+          }]
+        }
+      </py-config>
+      <py-script>
+        from pyodide.ffi import create_proxy
+        from main import *
 
-      p5.setup = create_proxy(setup)
-      p5.draw = create_proxy(draw)
-      p5.keyPressed = create_proxy(keyPressed)
-      p5.keyReleased = create_proxy(keyReleased) 
-      p5.mousePressed = create_proxy(mousePressed) 
-      p5.mouseReleased = create_proxy(mouseReleased)
-      setup()
-    </py-script>
+        p5.setup = create_proxy(setup)
+        p5.draw = create_proxy(draw)
+        p5.keyPressed = create_proxy(keyPressed)
+        p5.keyReleased = create_proxy(keyReleased) 
+        p5.mousePressed = create_proxy(mousePressed) 
+        p5.mouseReleased = create_proxy(mouseReleased)
+        setup()
+      </py-script>
+      <div class="flex justify-end flex-col" style="position: absolute; vertical-align: middle; width: 500px; height: 400px; z-index: 999;">
+        <div class="bg-gray-100 rounded-lg p-4 h-20 w-full flex justify-between">
+          <div>
+            <div>Movement - W A S D</div>
+            <div>Sprint - Shift</div>
+          </div>
+          <div>
+            <div>Aim - Mouse Movement</div>
+            <div class="w-full text-end">Shoot - Left Click</div>
+          </div>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
